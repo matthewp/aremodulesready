@@ -1,20 +1,23 @@
-.PHONY: app main minify polys dev watch serve
+.PHONY: app main minify polys dev watch serve sw
 
 app:
-	./node_modules/.bin/rollup -c rollup.config.js -o app.js src/app.js
+	./node_modules/.bin/rollup -c rollup.config.js -o js/app.js src/app.js
 
 main:
-	./node_modules/.bin/rollup -c rollup.config.js -o main.js src/main.js
+	./node_modules/.bin/rollup -c rollup.config.js -o js/main.js src/main.js
 
 polys:
-	cp ./node_modules/@webcomponents/custom-elements/custom-elements.min.js ce.js
-	cp ./node_modules/cloudydom/cloudydom.min.js sd.js
+	cp ./node_modules/@webcomponents/custom-elements/custom-elements.min.js js/ce.js
+	cp ./node_modules/cloudydom/cloudydom.min.js js/sd.js
 
 minify:
-	babili app.js > app.min.js
-	mv app.min.js app.js
-	babili main.js > main.min.js
-	mv main.min.js main.js
+	babili js/app.js > js/app.min.js
+	mv js/app.min.js js/app.js
+	babili js/main.js > js/main.min.js
+	mv js/main.min.js js/main.js
+
+sw:
+	node scripts/sw.js
 
 serve:
 	http-server -p 8077

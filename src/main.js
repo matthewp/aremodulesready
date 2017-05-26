@@ -1,3 +1,3 @@
 import fritz from 'fritz/window';
 
-fritz.use(new Worker('./app.js'));
+fritz.use(new Worker('./js/app.js'));

@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <title>Are Modules Ready?</title>
-<link rel="preload" href="./app.js" as="worker">
-<link rel="preload" href="./main.js" as="script">
+<link rel="preload" href="./js/app.js" as="worker">
+<link rel="preload" href="./js/main.js" as="script">
 
 <style>
   :root {
@@ -26,8 +26,8 @@
 (function(){
   var promise = Promise.resolve();
   [
-    [typeof ShadowRoot, './sd.js'],
-    [typeof customElements, './ce.js']
+    [typeof ShadowRoot, './js/sd.js'],
+    [typeof customElements, './js/ce.js']
   ].forEach(function(p){
     if(p[0] === 'undefined') {
       promise = promise.then(function(){
@@ -37,7 +37,7 @@
   });
 
   promise.then(function(){
-    return load('./main.js');
+    return load('./js/main.js');
   });
 
   function load(src) {
@@ -52,3 +52,4 @@
   }
 })();
 </script>
+<script src="./js/service-worker-registration.js"></script>
