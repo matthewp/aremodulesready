@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<title>Are Modules Ready?</title>
+<link rel="preload" href="/app.js" as="worker">
+<link rel="preload" href="/main.js" as="script">
+
+<style>
+  :root {
+    --secondary: #3484c6;
+    --banner: #9FD356;
+    --dark: #342E37;
+    --light: #FAFFFD;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--light);
+  }
+</style>
+
+<are-modules-ready></are-modules-ready>
+
+<script>
+(function(){
+  var promise = Promise.resolve();
+  [
+    [typeof ShadowRoot, './sd.js'],
+    [typeof customElements, './ce.js']
+  ].forEach(function(p){
+    if(p[0] === 'undefined') {
+      promise = promise.then(function(){
+        return load(p[1]);
+      });
+    }
+  });
+
+  promise.then(function(){
+    return load('./main.js');
+  });
+
+  function load(src) {
+    var script = document.createElement('script');
+    script.src = src;
+    return new Promise(function(resolve, reject){
+      script.onload = resolve;
+      script.onerror = reject;
+      var root = document.head || document.documentElement;
+      root.appendChild(script);
+    });
+  }
+})();
+</script>

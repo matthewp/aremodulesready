@@ -1,0 +1,71 @@
+.title {
+  text-align: center;
+  font-size: 300%;
+  margin: 1em 0;
+}
+
+.features {
+  list-style-type: none;
+  padding: 0;
+  max-width: 900px;
+  margin: auto;
+}
+
+module-feature {
+  display: block;
+  margin-top: 1em;
+}
+
+[slot=label] {
+  background-color: var(--banner);
+  margin: 0;
+  padding: 0.3em 0.5em;
+}
+
+[slot=desc] {
+  padding: 0 0.5em;
+  color: var(--light);
+  font-size: 110%;
+  line-height: 1.5em;
+}
+
+[slot=desc] a,
+[slot=desc] a:visited {
+  color: var(--light);
+  font-weight: bold;
+}
+
+.note {
+  padding: 0.5em;
+  line-height: 1.5em;
+}
+
+.note:nth-child(even) {
+  background: #FA824C;
+  color: var(--dark);
+}
+
+.note:nth-child(even) a,
+.note:nth-child(even) a:visited {
+  color: var(--dark);
+  font-weight: bold;
+}
+
+.note:nth-child(odd) {
+  background: var(--dark);
+  color: var(--light);
+}
+
+.note:nth-child(odd) a,
+.note:nth-child(odd) a:visited {
+  color: var(--light);
+  font-weight: bold;
+}
+
+.closing {
+  margin: 1.5em 0;
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+  font-style: italic;
+}

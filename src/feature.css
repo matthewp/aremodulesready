@@ -1,0 +1,44 @@
+.arm,
+.feature,
+.results {
+  display: flex;
+}
+
+.arm {
+  background: var(--secondary);
+}
+
+.feature {
+  flex-direction: column;
+  flex: 2;
+}
+
+.results {
+  flex-direction: column;
+  flex: 2;
+}
+
+.browsers {
+  align-self: flex-end;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.browser {
+  display: inline-block;
+  padding: 0.7em;
+  margin: 0.3em;
+}
+
+.browser img {
+  width: 5em;
+}
+
+.browser.supported {
+  background: #376D37;
+}
+
+.browser:not(.supported) {
+  background: #F24236;
+}

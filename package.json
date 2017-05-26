@@ -1,0 +1,19 @@
+{
+  "name": "aremodulesready",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "fritz": "next",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-string": "^2.0.2"
+  },
+  "dependencies": {
+    "@webcomponents/custom-elements": "^1.0.0",
+    "bram": "^0.6.6",
+    "cloudydom": "^1.0.6"
+  }
+}
