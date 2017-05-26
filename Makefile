@@ -28,4 +28,4 @@ watch:
 dev:
 	make watch & make serve
 
-release: app main polys minify
+release: app main polys minify sw
