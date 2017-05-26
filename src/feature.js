@@ -35,7 +35,7 @@ class ModuleFeature extends Component {
                 let classes = ["browser", browser.supported ? "supported" : ""]
                 return (
                   <li class={classes.join(' ')}>
-                    <img src={`/img/${name.toLowerCase()}.png`} title={name} />
+                    <img src={`./img/${name.toLowerCase()}.png`} title={name} />
                   </li>
                 )
               })}
