@@ -1,6 +1,6 @@
 function browser(name) {
-  return function(supported, flag){
-    return { name, supported, flag };
+  return function(supported, flag, inProgress){
+    return { name, supported, flag, inProgress };
   }
 }
 

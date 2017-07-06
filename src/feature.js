@@ -32,7 +32,7 @@ class ModuleFeature extends Component {
             <ul class="browsers">
               {["Chrome", "Firefox", "Safari", "Edge"].map(name => {
                 let browser = find(feature, b => b.name === name);
-                let classes = ["browser", browser.supported ? "supported" : ""]
+                let classes = ["browser", browser.supported ? "supported" : browser.inProgress ? "in-progress": ""]
                 return (
                   <li class={classes.join(' ')}>
                     <img src={`./img/${name.toLowerCase()}.png`} title={name} />

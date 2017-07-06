@@ -10,7 +10,7 @@ class AreModulesReady extends Component {
       edge(true, true), safari(true)];
     this.workers = [chrome(false), firefox(false),
       edge(false), safari(false)];
-    this.dynamic = [chrome(false), firefox(false),
+    this.dynamic = [chrome(false, false, true), firefox(false),
       edge(false), safari(true, true)];
   }
 
@@ -27,7 +27,7 @@ class AreModulesReady extends Component {
             <h2 slot="label">&lt;script type="module"&gt;</h2>
             <p slot="desc">The ability to load a module and its dependencies from a &lt;script&gt; tag.</p>
             <section slot="notes">
-              <div class="note"><strong>Chrome</strong>: Available in Chrome 60 (currently in Canary) behind a flag. Enable <strong>Experimental Web Platform features</strong> in chrome://flags to use.</div>
+              <div class="note"><strong>Chrome</strong>: Available in Chrome 61.</div>
               <div class="note"><strong>Firefox</strong>: Available in Firefox 54 behind a flag. In about:config search for <em>dom.moduleScripts.enabled</em> and set to true.</div>
               <div class="note"><strong>Safari</strong>: Available in Safari 10.1.</div>
               <div class="note"><strong>Edge</strong>: Available via the Windows Insider Program.</div>
@@ -49,7 +49,7 @@ class AreModulesReady extends Component {
             <h2 slot="label">import()</h2>
             <p slot="desc">Provides the ability to dynamically import a module from within a module or a script. <a href="https://tc39.github.io/proposal-dynamic-import/">Spec</a>.</p>
             <section slot="notes">
-              <div class="note"><strong>Chrome</strong>: <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=711706">Not yet in progress</a>.</div>              
+              <div class="note"><strong>Chrome</strong>: <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=711706">In progress</a>. <a href="https://groups.google.com/a/chromium.org/forum/#!msg/blink-dev/wRLMM5-kpCY/Y0be_ASaAwAJ">Intent to Implement</a>.</div>              
               <div class="note"><strong>Firefox</strong>: <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1342012">Not yet in progress</a>.</div>
               <div class="note"><strong>Safari</strong>: Available in Safari Technology Preview.</div>
               <div class="note"><strong>Edge</strong>: Not yet implemented.</div>
