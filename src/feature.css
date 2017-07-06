@@ -39,6 +39,10 @@
   background: #376D37;
 }
 
-.browser:not(.supported) {
+.browser.in-progress {
+  background: #D5BB00;
+}
+
+.browser:not(.supported):not(.in-progress) {
   background: #F24236;
 }
