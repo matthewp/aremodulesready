@@ -33,5 +33,3 @@ pa(b,Element.prototype,{o:ha,append:ia});sa(b)};/*
 */
 var Z=window.customElements;if(!Z||Z.forcePolyfill||"function"!=typeof Z.define||"function"!=typeof Z.get){var Y=new r;oa();qa();ra();ta();document.__CE_hasRegistry=!0;var customElements=new E(Y);Object.defineProperty(window,"customElements",{configurable:!0,enumerable:!0,value:customElements})};
 }).call(self);
-
-//# sourceMappingURL=custom-elements.min.js.map
