@@ -1,8 +1,43 @@
 <!doctype html>
 <html lang="en">
 <title>Are Modules Ready?</title>
-<link rel="preload" href="./js/app.js" as="worker">
-<link rel="preload" href="./js/main.js" as="script">
+
+<script>
+(function(){
+  var promise = Promise.resolve();
+  [
+    [typeof ShadowRoot, './js/sd.js'],
+    [typeof customElements, './js/ce.js']
+  ].forEach(function(p){
+    if(p[0] === 'undefined') {
+      promise = promise.then(function(){
+        return load(p[1]);
+      });
+    }
+  });
+
+  promise.then(function(){
+    return Promise.all([
+      load('/js/app.js', true),
+      load('/js/feature.js', true)
+    ]);
+  });
+
+  function load(src, m) {
+    var script = document.createElement('script');
+    if(m) {
+      script.type = "module";
+    }
+    script.src = src;
+    return new Promise(function(resolve, reject){
+      script.onload = resolve;
+      script.onerror = reject;
+      var root = document.head || document.documentElement;
+      root.appendChild(script);
+    });
+  }
+})();
+</script>
 
 <style>
   :root {
@@ -22,34 +57,191 @@
 
 <are-modules-ready></are-modules-ready>
 
-<script>
-(function(){
-  var promise = Promise.resolve();
-  [
-    [typeof ShadowRoot, './js/sd.js'],
-    [typeof customElements, './js/ce.js']
-  ].forEach(function(p){
-    if(p[0] === 'undefined') {
-      promise = promise.then(function(){
-        return load(p[1]);
-      });
+<template id="app-tmpl">
+  <main>
+    <style>
+    .title {
+      text-align: center;
+      font-size: 300%;
+      margin: 1em 0;
     }
-  });
 
-  promise.then(function(){
-    return load('./js/main.js');
-  });
+    .features {
+      list-style-type: none;
+      padding: 0;
+      max-width: 900px;
+      margin: auto;
+    }
 
-  function load(src) {
-    var script = document.createElement('script');
-    script.src = src;
-    return new Promise(function(resolve, reject){
-      script.onload = resolve;
-      script.onerror = reject;
-      var root = document.head || document.documentElement;
-      root.appendChild(script);
-    });
-  }
-})();
-</script>
-<script src="./js/service-worker-registration.js"></script>
+    module-feature {
+      display: block;
+      margin-top: 1em;
+    }
+
+    [slot=label] {
+      background-color: var(--banner);
+      margin: 0;
+      padding: 0.3em 0.5em;
+    }
+
+    [slot=desc] {
+      padding: 0 0.5em;
+      color: var(--light);
+      font-size: 110%;
+      line-height: 1.5em;
+    }
+
+    [slot=desc] a,
+    [slot=desc] a:visited {
+      color: var(--light);
+      font-weight: bold;
+    }
+
+    .note {
+      padding: 0.5em;
+      line-height: 1.5em;
+    }
+
+    .note:nth-child(even) {
+      background: #FA824C;
+      color: var(--dark);
+    }
+
+    .note:nth-child(even) a,
+    .note:nth-child(even) a:visited {
+      color: var(--dark);
+      font-weight: bold;
+    }
+
+    .note:nth-child(odd) {
+      background: var(--dark);
+      color: var(--light);
+    }
+
+    .note:nth-child(odd) a,
+    .note:nth-child(odd) a:visited {
+      color: var(--light);
+      font-weight: bold;
+    }
+
+    .closing {
+      margin: 1.5em 0;
+      text-align: center;
+      font-size: 200%;
+      font-weight: bold;
+      font-style: italic;
+    }
+    </style>
+    <h1 class="title">Are Modules Ready?</h1>
+
+    <article class="features">
+      <module-feature :feature="{{script}}">
+        <h2 slot="label">&lt;script type="module"&gt;</h2>
+        <p slot="desc">The ability to load a module and its dependencies from a &lt;script&gt; tag.</p>
+        <section slot="notes">
+          <div class="note"><strong>Chrome</strong>: Available in Chrome 61.</div>
+          <div class="note"><strong>Firefox</strong>: Available in Firefox 54 behind a flag. In about:config search for <em>dom.moduleScripts.enabled</em> and set to true.</div>
+          <div class="note"><strong>Safari</strong>: Available in Safari 10.1.</div>
+          <div class="note"><strong>Edge</strong>: Available via the Windows Insider Program.</div>
+        </section>
+      </module-feature>
+
+      <module-feature :feature="{{workers}}">
+        <h2 slot="label">Worker modules</h2>
+        <p slot="desc">Create Web Workers that are modules (and are able to import other modules) using <code>new Worker(path,  type: "module") </code></p>
+        <section slot="notes">
+          <div class="note"><strong>Chrome</strong>: <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=680046">Not yet in progress</a>.</div>
+          <div class="note"><strong>Firefox</strong>: <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1247687">Not yet in progress</a>.</div>
+          <div class="note"><strong>Safari</strong>: Not yet implemented.</div>
+          <div class="note"><strong>Edge</strong>: Not yet implemented.</div>
+        </section>
+      </module-feature>
+
+      <module-feature :feature="{{dynamic}}">
+        <h2 slot="label">import()</h2>
+        <p slot="desc">Provides the ability to dynamically import a module from within a module or a script. <a href="https://tc39.github.io/proposal-dynamic-import/">Spec</a>.</p>
+        <section slot="notes">
+          <div class="note"><strong>Chrome</strong>: Available in Chrome 63.</div>
+          <div class="note"><strong>Firefox</strong>: <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1342012">Not yet in progress</a>.</div>
+          <div class="note"><strong>Safari</strong>: Available in Safari Technology Preview.</div>
+          <div class="note"><strong>Edge</strong>: Not yet implemented.</div>
+        </section>
+      </module-feature>
+    </article>
+
+    <div class="closing">We are getting there 🤠!</div>
+  </main>
+</template>
+
+<template id="feature-tmpl">
+  <article>
+    <style>
+    .arm,
+    .feature,
+    .results {
+      display: flex;
+    }
+
+    .arm {
+      background: var(--secondary);
+    }
+
+    .feature {
+      flex-direction: column;
+      flex: 2;
+    }
+
+    .results {
+      flex-direction: column;
+      flex: 2;
+    }
+
+    .browsers {
+      display: flex;
+      align-self: flex-end;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .browser {
+      display: inline-block;
+      padding: 0.7em;
+      margin: 0.3em;
+    }
+
+    .browser img {
+      width: 5em;
+    }
+
+    .browser.supported {
+      background: #376D37;
+    }
+
+    .browser.in-progress {
+      background: #D5BB00;
+    }
+
+    .browser:not(.supported):not(.in-progress) {
+      background: #F24236;
+    }
+    </style>
+
+    <div class="arm">
+      <header class="feature">
+        <slot name="label"></slot>
+        <slot name="desc"></slot>
+      </header>
+      <div class="results">
+        <ul class="browsers">
+          <template each="{{browsers}}">
+            <li class="{{classes}}">
+              <img src="{{img}}" title="{{browser}}" />
+            </li>
+          </template>
+        </ul>
+        <slot name="notes"></slot>
+      </div>
+    </div>
+  </article>
+</template>
