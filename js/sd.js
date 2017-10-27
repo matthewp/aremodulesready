@@ -60,3 +60,5 @@ ub={querySelector:function(a){return Va(this,function(b){return ca.call(b,a)},fu
 function Z(a,b){for(var d=Object.getOwnPropertyNames(b),c=0;c<d.length;c++){var e=d[c],h=Object.getOwnPropertyDescriptor(b,e);h.value?a[e]=h.value:Object.defineProperty(a,e,h)}};p.J&&(window.ShadyDOM={inUse:p.J,patch:function(a){return a},isShadyRoot:u,enqueue:ha,flush:E,settings:p,filterMutations:cb,observeChildren:ab,unobserveChildren:bb,nativeMethods:T,nativeTree:H},window.Event=ob,window.CustomEvent=pb,window.MouseEvent=qb,mb(),Z(window.Node.prototype,sb),Z(window.Text.prototype,tb),Z(window.DocumentFragment.prototype,ub),Z(window.Element.prototype,wb),Z(window.Document.prototype,xb),window.HTMLSlotElement&&Z(window.HTMLSlotElement.prototype,vb),p.i&&(R(window.Node.prototype),
 R(window.Text.prototype),R(window.DocumentFragment.prototype),R(window.Element.prototype),R((window.customElements&&window.customElements.nativeHTMLElement||HTMLElement).prototype),R(window.Document.prototype),window.HTMLSlotElement&&R(window.HTMLSlotElement.prototype)),window.ShadowRoot=W);
 }).call(self);
+
+//# sourceMappingURL=cloudydom.min.js.map
