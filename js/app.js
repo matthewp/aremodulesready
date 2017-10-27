@@ -15,6 +15,8 @@ class AreModulesReady extends Element {
       edge(false), safari(false)];
     this.model.dynamic = [chrome(true, false), firefox(false),
       edge(false), safari(false, true, true)];
+    this.model.metaUrl = [chrome(true, false), firefox(false),
+      edge(false), safari(false)];
   }
 }
 
