@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<title>Modules tests</title>
+<style>
+  main {
+    font-size: 125%;
+  }
+  .result:after {
+    content: "👎🏼"
+  }
+  .works:after {
+    content: "👍"
+  }
+</style>
+<main>
+  <div class="feature">
+    <span class="description">&lt;script type=module&gt;</span>
+    <span id="script-type-module" class="result"></span>
+  </div>
+  <div class="feature">
+    <span class="description">Dynamic <code>import()</code></span>
+    <span id="dynamic-import" class="result"></span>
+  </div>
+  <div class="feature">
+    <span class="description">WebWorker modules</span>
+    <span id="module-workers" class="result"></span>
+  </div>
+  <div class="feature">
+    <span class="description">import.meta.url</span>
+    <span id="import-meta-url" class="result"></span>
+  </div>
+</main>
+
+<!-- Test script[type=module] -->
+<script type="module" src="./tests/script-type-module.js"></script>
+
+<!-- Tests dynamic import() -->
+<script type="module">
+  import('./tests/dynamic-import.js');
+</script>
+
+<!-- Tests module workers -->
+<script type="module">
+  let worker = new Worker('./tests/worker/worker.js', {
+    type: 'module'
+  });
+
+  worker.addEventListener('message', ev => {
+    // Worker should ping back with the value of a module it loaded
+    if(ev.data === true) {
+      let el = document.querySelector('module-workers');
+      el.classList.add('works');
+    }
+  });
+</script>
+
+<!-- Tests import.meta.url -->
+<script type="module" src="./tests/import-meta-url.js"></script>
