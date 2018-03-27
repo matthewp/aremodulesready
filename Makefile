@@ -13,3 +13,7 @@ serve:
 dev: serve
 
 release: polys sw
+
+deploy:
+	aws s3 sync . s3://aremodulesready.com --exclude ".git/*" --exclude "node_modules/*"
+.PHONY: deploy
