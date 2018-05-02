@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <title>Modules tests</title>
+<meta charset="utf-8">
 <style>
   main {
     font-size: 125%;
@@ -47,8 +48,8 @@
 
   worker.addEventListener('message', ev => {
     // Worker should ping back with the value of a module it loaded
-    if(ev.data === true) {
-      let el = document.querySelector('module-workers');
+    if(ev.data.value === true) {
+      let el = document.querySelector('#module-workers');
       el.classList.add('works');
     }
   });

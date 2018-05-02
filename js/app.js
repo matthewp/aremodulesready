@@ -11,7 +11,7 @@ class AreModulesReady extends Element {
     super();
     this.model.script = [chrome(true, true), firefox(false, true, true),
       edge(false, true, true), safari(true)];
-    this.model.workers = [chrome(false), firefox(false),
+    this.model.workers = [chrome(false, true, true), firefox(false),
       edge(false), safari(false)];
     this.model.dynamic = [chrome(true, false), firefox(false),
       edge(false), safari(false, true, true)];
