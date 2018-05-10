@@ -9,14 +9,14 @@ class AreModulesReady extends Element {
 
   constructor() {
     super();
-    this.model.script = [chrome(true, true), firefox(false, true, true),
-      edge(false, true, true), safari(true)];
+    this.model.script = [chrome(true), firefox(true),
+      edge(true), safari(true)];
     this.model.workers = [chrome(false, true, true), firefox(false),
       edge(false), safari(false)];
-    this.model.dynamic = [chrome(true, false), firefox(false),
-      edge(false), safari(false, true, true)];
-    this.model.metaUrl = [chrome(true, false), firefox(false),
-      edge(false), safari(false)];
+    this.model.dynamic = [chrome(true), firefox(false),
+      edge(false), safari(true)];
+    this.model.metaUrl = [chrome(true), firefox(false),
+      edge(false), safari(true)];
   }
 }
 
