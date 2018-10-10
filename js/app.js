@@ -14,8 +14,8 @@ class AreModulesReady extends Element {
     this.model.workers = [chrome(false, true, true), firefox(false),
       edge(false), safari(false)];
     this.model.dynamic = [chrome(true), firefox(false),
-      edge(false), safari(true)];
     this.model.metaUrl = [chrome(true), firefox(false),
+      edge(false, true, true), safari(true)];
       edge(false), safari(true)];
   }
 }
